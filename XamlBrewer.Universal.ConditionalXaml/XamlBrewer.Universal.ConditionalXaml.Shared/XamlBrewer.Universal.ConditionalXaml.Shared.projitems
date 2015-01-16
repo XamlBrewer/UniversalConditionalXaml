@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ea74ab08-26ad-4fac-b7f0-06da202c6e07</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>XamlBrewer.Universal.ConditionalXaml</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
