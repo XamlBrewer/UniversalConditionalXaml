@@ -5,6 +5,7 @@
       xmlns:local="using:XamlBrewer.Universal.ConditionalXaml"
       xmlns:win81="condition:WINDOWS_APP"
       xmlns:wp81="condition:WINDOWS_PHONE_APP"
+      xmlns:cond="using:SamuelBlanchard.Controls.Statements"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d win81 wp81"
