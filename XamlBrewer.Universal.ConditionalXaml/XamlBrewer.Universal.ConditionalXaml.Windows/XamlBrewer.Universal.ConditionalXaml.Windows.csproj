@@ -124,6 +124,9 @@
     <Reference Include="SamuelBlanchard.Controls.Statements">
       <HintPath>..\..\packages\ConditionalXaml.1.0.2\lib\netcore451\SamuelBlanchard.Controls.Statements.dll</HintPath>
     </Reference>
+    <Reference Include="WinRTXamlToolkit.Controls.Gauge">
+      <HintPath>..\..\packages\WinRTXamlToolkit.Controls.Gauge.Windows.1.8.1.0\lib\netcore451\WinRTXamlToolkit.Controls.Gauge.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

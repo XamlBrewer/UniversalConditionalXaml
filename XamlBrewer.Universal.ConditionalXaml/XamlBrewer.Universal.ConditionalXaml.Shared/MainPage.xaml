@@ -6,6 +6,7 @@
       xmlns:win81="condition:WINDOWS_APP"
       xmlns:wp81="condition:WINDOWS_PHONE_APP"
       xmlns:cond="using:SamuelBlanchard.Controls.Statements"
+      xmlns:toolkit="using:WinRTXamlToolkit.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d win81 wp81"
@@ -16,8 +17,8 @@
         <wp81:Hub.HeaderTemplate>
             <wp81:DataTemplate>
                 <wp81:TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
-                                Text="Universal Conditional XAML" 
-                                Margin="0 20 0 0"/>
+                                Text="Universal Conditional XAML"
+                                Margin="0 20 0 0" />
             </wp81:DataTemplate>
         </wp81:Hub.HeaderTemplate>
         <HubSection Header="Preprocessing">
@@ -91,7 +92,63 @@
                 </Grid>
             </DataTemplate>
         </HubSection>
-        <HubSection Header="Logic"></HubSection>
-        <HubSection Header="Combinations"></HubSection>
+        <HubSection Header="Logic">
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <ToggleSwitch x:Name="SettingsSwitch"
+                                      IsOn="True"
+                                      OnContent="Metric"
+                                      OffContent="Weird" />
+
+                        <cond:Statement>
+                            <cond:If>
+                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />
+                                <cond:If.Then>
+                                    <toolkit:Gauge Unit="Kilometers" />
+                                </cond:If.Then>
+                                <cond:If.Else>
+                                    <toolkit:Gauge Unit="Miles" />
+                                </cond:If.Else>
+                            </cond:If>
+                        </cond:Statement>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </HubSection>
+        <HubSection Header="Combinations">
+            <DataTemplate>
+                <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <ToggleSwitch x:Name="SettingsSwitch"
+                                      IsOn="True"
+                                      OnContent="Metric"
+                                      OffContent="Weird" />
+
+                        <cond:Statement>
+                            <cond:If>
+                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />
+                                <cond:If.Then>
+                                    <DatePicker></DatePicker>
+                                </cond:If.Then>
+                                <cond:If.Else>Nothing</cond:If.Else>
+                            </cond:If>
+                        </cond:Statement>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </HubSection>
     </Hub>
 </Page>
