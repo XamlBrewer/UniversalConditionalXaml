@@ -9,6 +9,7 @@
       xmlns:toolkit="using:WinRTXamlToolkit.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:XamlBrewer.Universal.ConditionalXaml.ViewModels"
       mc:Ignorable="d win81 wp81"
       mc:ProcessContent="win81:* wp81:*">
     <Hub Foreground="Yellow"
@@ -95,6 +96,9 @@
         <HubSection Header="Logic">
             <DataTemplate>
                 <Grid>
+                    <Grid.DataContext>
+                        <vm:TintinRocket />
+                    </Grid.DataContext>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
@@ -105,47 +109,39 @@
                                       OnContent="Metric"
                                       OffContent="Weird" />
 
+                        <!-- Conditional Controls -->
                         <cond:Statement>
                             <cond:If>
                                 <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
                                                        Operator="Equal"
                                                        Value2="True" />
                                 <cond:If.Then>
-                                    <toolkit:Gauge Unit="Kilometers" />
+                                    <toolkit:Gauge Unit="Kilometers"
+                                                   Value="{Binding Speed}"
+                                                   Maximum="1200"
+                                                   wp81:Height="100" />
                                 </cond:If.Then>
                                 <cond:If.Else>
-                                    <toolkit:Gauge Unit="Miles" />
+                                    <toolkit:Gauge Unit="Miles"
+                                                   Value="{Binding SpeedInMilesPerHour}"
+                                                   Maximum="1000"
+                                                   wp81:Height="100" />
                                 </cond:If.Else>
                             </cond:If>
                         </cond:Statement>
-                    </StackPanel>
-                </Grid>
-            </DataTemplate>
-        </HubSection>
-        <HubSection Header="Combinations">
-            <DataTemplate>
-                <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
 
-                    <StackPanel>
-                        <ToggleSwitch x:Name="SettingsSwitch"
-                                      IsOn="True"
-                                      OnContent="Metric"
-                                      OffContent="Weird" />
-
-                        <cond:Statement>
-                            <cond:If>
+                        <!-- Conditional Properties -->
+                        <cond:Statement x:Name="HeightUnit"
+                                        Visibility="Collapsed">
+                            <cond:If Then="Meter"
+                                     Else="Feet">
                                 <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
                                                        Operator="Equal"
                                                        Value2="True" />
-                                <cond:If.Then>
-                                    <DatePicker></DatePicker>
-                                </cond:If.Then>
-                                <cond:If.Else>Nothing</cond:If.Else>
                             </cond:If>
                         </cond:Statement>
+                        <toolkit:Gauge Unit="{Binding ElementName=HeightUnit, Path=Content}"
+                                       wp81:Height="100" />
                     </StackPanel>
                 </Grid>
             </DataTemplate>
