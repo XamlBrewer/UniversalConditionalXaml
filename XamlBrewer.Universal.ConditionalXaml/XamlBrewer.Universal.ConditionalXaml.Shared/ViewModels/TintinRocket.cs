@@ -9,14 +9,14 @@
     {
         public TintinRocket()
         {
-            this.Speed = 1000;
-            this.Height = 25;
+            this.Speed = 13000;
+            this.Height = 125;
         }
 
         public double Speed { get; set; }
         public double Height { get; set; }
 
-        public double SpeedInMilesPerHour
+        public double SpeedInMiles
         {
             get { return this.Speed * 0.62137119; }
         }

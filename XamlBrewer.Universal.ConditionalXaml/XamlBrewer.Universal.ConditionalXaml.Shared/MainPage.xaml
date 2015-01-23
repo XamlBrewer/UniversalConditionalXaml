@@ -47,7 +47,8 @@
                              Margin="10"
                              wp81:Margin="5"
                              HorizontalAlignment="Left"
-                             Grid.Row="1">
+                             Grid.Row="1"
+                             wp81:MaxWidth="160">
 
                         <Canvas Height="80"
                                 Width="200"
@@ -93,7 +94,8 @@
                 </Grid>
             </DataTemplate>
         </HubSection>
-        <HubSection Header="Logic">
+        <HubSection x:Name="SecondHub"
+                    Header="Logic">
             <DataTemplate>
                 <Grid>
                     <Grid.DataContext>
@@ -109,26 +111,46 @@
                                       OnContent="Metric"
                                       OffContent="Weird" />
 
+                        <TextBlock Text="Speed"
+                                   Margin="5 5 5 -15"
+                                   FontSize="20" />
+
                         <!-- Conditional Controls -->
-                        <cond:Statement>
-                            <cond:If>
-                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
-                                                       Operator="Equal"
-                                                       Value2="True" />
-                                <cond:If.Then>
-                                    <toolkit:Gauge Unit="Kilometers"
-                                                   Value="{Binding Speed}"
-                                                   Maximum="1200"
-                                                   wp81:Height="100" />
-                                </cond:If.Then>
-                                <cond:If.Else>
-                                    <toolkit:Gauge Unit="Miles"
-                                                   Value="{Binding SpeedInMilesPerHour}"
-                                                   Maximum="1000"
-                                                   wp81:Height="100" />
-                                </cond:If.Else>
-                            </cond:If>
-                        </cond:Statement>
+                        <StackPanel HorizontalAlignment="Center">
+                            <cond:Statement>
+                                <cond:If>
+                                    <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                           Operator="Equal"
+                                                           Value2="True" />
+                                    <cond:If.Then>
+                                        <toolkit:Gauge Unit="Km/s"
+                                                       Value="{Binding Speed}"
+                                                       Maximum="15000"
+                                                       TickBrush="Transparent"
+                                                       ScaleTickBrush="Black"
+                                                       ValueBrush="White"
+                                                       Margin="5"
+                                                       wp81:Height="200"
+                                                       VerticalAlignment="Center" />
+                                    </cond:If.Then>
+                                    <cond:If.Else>
+                                        <toolkit:Gauge Unit="Miles/s"
+                                                       Value="{Binding SpeedInMiles}"
+                                                       Maximum="10000"
+                                                       TickBrush="Transparent"
+                                                       ScaleTickBrush="Black"
+                                                       ValueBrush="White"
+                                                       Margin="5"
+                                                       wp81:Height="200"
+                                                       VerticalAlignment="Center" />
+                                    </cond:If.Else>
+                                </cond:If>
+                            </cond:Statement>
+                        </StackPanel>
+
+                        <TextBlock Text="Height"
+                                   Margin="5 5 5 -15"
+                                   FontSize="20" />
 
                         <!-- Conditional Properties -->
                         <cond:Statement x:Name="HeightUnit"
@@ -140,8 +162,32 @@
                                                        Value2="True" />
                             </cond:If>
                         </cond:Statement>
+                        <cond:Statement x:Name="MaxHeight"
+                                        Visibility="Collapsed">
+                            <cond:If Then="150"
+                                     Else="500">
+                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />
+                            </cond:If>
+                        </cond:Statement>
+                        <cond:Statement x:Name="HeightValue"
+                                        Visibility="Collapsed">
+                            <cond:If Then="{Binding Height}"
+                                     Else="{Binding HeightInFeet}">
+                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />
+                            </cond:If>
+                        </cond:Statement>
                         <toolkit:Gauge Unit="{Binding ElementName=HeightUnit, Path=Content}"
-                                       wp81:Height="100" />
+                                       Maximum="{Binding ElementName=MaxHeight, Path=Content}"
+                                       Value="{Binding ElementName=HeightValue, Path=Content}"
+                                       TickBrush="Transparent"
+                                       ScaleTickBrush="Black"
+                                       ValueBrush="White"
+                                       wp81:Height="200"
+                                       VerticalAlignment="Center" />
                     </StackPanel>
                 </Grid>
             </DataTemplate>
