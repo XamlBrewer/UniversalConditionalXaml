@@ -12,6 +12,9 @@
       xmlns:vm="using:XamlBrewer.Universal.ConditionalXaml.ViewModels"
       mc:Ignorable="d win81 wp81"
       mc:ProcessContent="win81:* wp81:*">
+    <Page.Resources>
+        <vm:Preferences x:Key="Preferences" />
+    </Page.Resources>
     <Hub Foreground="Yellow"
          Header="Header"
          win81:Header="Universal App Conditional XAML">
@@ -94,16 +97,13 @@
                 </Grid>
             </DataTemplate>
         </HubSection>
-        <HubSection x:Name="SecondHub"
+        <HubSection x:Name="GaugeSection"
                     Header="Logic">
-            <HubSection.Resources>
-                <vm:Preferences x:Key="Preferences" />
-            </HubSection.Resources>
+            <HubSection.DataContext>
+                <vm:TintinRocket />
+            </HubSection.DataContext>
             <DataTemplate>
                 <Grid>
-                    <Grid.DataContext>
-                        <vm:TintinRocket />
-                    </Grid.DataContext>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
@@ -123,7 +123,10 @@
                         <StackPanel HorizontalAlignment="Center">
                             <cond:Statement>
                                 <cond:If>
-                                    <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                    <!--<cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                           Operator="Equal"
+                                                           Value2="True" />-->
+                                    <cond:BooleanCondition Value1="{Binding Source={StaticResource Preferences}, Path=IsMetric}"
                                                            Operator="Equal"
                                                            Value2="True" />
                                     <cond:If.Then>
