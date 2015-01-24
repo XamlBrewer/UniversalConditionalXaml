@@ -19,6 +19,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MVVM\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TintinRocket.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -96,6 +96,9 @@
         </HubSection>
         <HubSection x:Name="SecondHub"
                     Header="Logic">
+            <HubSection.Resources>
+                <vm:Preferences x:Key="Preferences" />
+            </HubSection.Resources>
             <DataTemplate>
                 <Grid>
                     <Grid.DataContext>
@@ -107,9 +110,10 @@
 
                     <StackPanel>
                         <ToggleSwitch x:Name="SettingsSwitch"
-                                      IsOn="True"
                                       OnContent="Metric"
-                                      OffContent="Weird" />
+                                      OffContent="Weird"
+                                      DataContext="{StaticResource Preferences}"
+                                      IsOn="{Binding IsMetric, Mode=TwoWay}" />
 
                         <TextBlock Text="Speed"
                                    Margin="5 5 5 -15"
@@ -157,27 +161,36 @@
                                         Visibility="Collapsed">
                             <cond:If Then="Meter"
                                      Else="Feet">
-                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                <cond:BooleanCondition Value1="{Binding Source={StaticResource Preferences}, Path=IsMetric}"
                                                        Operator="Equal"
                                                        Value2="True" />
+                                <!--<cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />-->
                             </cond:If>
                         </cond:Statement>
                         <cond:Statement x:Name="MaxHeight"
                                         Visibility="Collapsed">
                             <cond:If Then="150"
                                      Else="500">
-                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                <cond:BooleanCondition Value1="{Binding Source={StaticResource Preferences}, Path=IsMetric}"
                                                        Operator="Equal"
                                                        Value2="True" />
+                                <!--<cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />-->
                             </cond:If>
                         </cond:Statement>
                         <cond:Statement x:Name="HeightValue"
                                         Visibility="Collapsed">
                             <cond:If Then="{Binding Height}"
                                      Else="{Binding HeightInFeet}">
-                                <cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                <cond:BooleanCondition Value1="{Binding Source={StaticResource Preferences}, Path=IsMetric}"
                                                        Operator="Equal"
                                                        Value2="True" />
+                                <!--<cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
+                                                       Operator="Equal"
+                                                       Value2="True" />-->
                             </cond:If>
                         </cond:Statement>
                         <toolkit:Gauge Unit="{Binding ElementName=HeightUnit, Path=Content}"
