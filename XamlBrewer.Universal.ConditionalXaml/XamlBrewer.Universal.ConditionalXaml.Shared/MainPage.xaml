@@ -25,6 +25,7 @@
                                 Margin="0 20 0 0" />
             </wp81:DataTemplate>
         </wp81:Hub.HeaderTemplate>
+
         <HubSection Header="Preprocessing">
             <DataTemplate>
                 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -83,13 +84,13 @@
                                            VerticalAlignment="Bottom"
                                            Padding="0"
                                            Margin="0 0 8 12">
-            		<Run Text="XAML" />
-                    <wp81:LineBreak />
-            		<Run Text="Brewer"
-                                    Foreground="Silver"
-                                    win81:Foreground="Black"
-                                    wp81:Foreground="DarkOrange"
-                                    FontWeight="Light" />
+                                    <Run Text="XAML" />
+                                    <wp81:LineBreak />
+                                    <Run Text="Brewer"
+                                         Foreground="Silver"
+                                         win81:Foreground="Black"
+                                         wp81:Foreground="DarkOrange"
+                                         FontWeight="Light" />
                                 </TextBlock>
                             </Grid>
                         </Canvas>
@@ -123,9 +124,11 @@
                         <StackPanel HorizontalAlignment="Center">
                             <cond:Statement>
                                 <cond:If>
+                                    <!-- Binding to a UI element -->
                                     <!--<cond:BooleanCondition Value1="{Binding ElementName=SettingsSwitch, Path=IsOn}"
-                                                           Operator="Equal"
-                                                           Value2="True" />-->
+                                                                Operator="Equal"
+                                                                Value2="True" />-->
+                                    <!-- Binding to a viewmodel -->
                                     <cond:BooleanCondition Value1="{Binding Source={StaticResource Preferences}, Path=IsMetric}"
                                                            Operator="Equal"
                                                            Value2="True" />

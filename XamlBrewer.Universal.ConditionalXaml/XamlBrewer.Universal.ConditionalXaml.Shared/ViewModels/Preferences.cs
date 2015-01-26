@@ -1,7 +1,7 @@
-﻿using Mvvm;
-
-namespace XamlBrewer.Universal.ConditionalXaml.ViewModels
+﻿namespace XamlBrewer.Universal.ConditionalXaml.ViewModels
 {
+    using Mvvm;
+
     public class Preferences : BindableBase
     {
         private bool isMetric = true;
